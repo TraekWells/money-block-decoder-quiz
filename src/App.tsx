@@ -319,7 +319,7 @@ const MoneyBlockQuiz = () => {
     },
   ];
 
-  const handleAnswer = (optionIndex) => {
+  const handleAnswer = (optionIndex: number) => {
     const newAnswers = { ...answers, [currentQuestion]: optionIndex };
     setAnswers(newAnswers);
 
@@ -392,7 +392,7 @@ const MoneyBlockQuiz = () => {
 
   const progressPercentage = ((currentQuestion + 1) / questions.length) * 100;
 
-  const styles = {
+  const styles: Record<string, React.CSSProperties> = {
     container: {
       minHeight: "100vh",
       background:
@@ -632,16 +632,16 @@ const MoneyBlockQuiz = () => {
           <button
             onClick={resetQuiz}
             style={styles.resetButton}
-            onMouseEnter={(e) => {
-              e.target.style.background =
-                "linear-gradient(135deg, #7c3aed, #db2777)";
-              e.target.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background =
-                "linear-gradient(135deg, #8b5cf6, #ec4899)";
-              e.target.style.transform = "translateY(0)";
-            }}
+            // onMouseEnter={(e) => {
+            //   e.target.style.background =
+            //     "linear-gradient(135deg, #7c3aed, #db2777)";
+            //   e.target.style.transform = "translateY(-2px)";
+            // }}
+            // onMouseLeave={(e) => {
+            //   e.target.style.background =
+            //     "linear-gradient(135deg, #8b5cf6, #ec4899)";
+            //   e.target.style.transform = "translateY(0)";
+            // }}
           >
             <RefreshCw size={20} />
             Take Quiz Again
@@ -690,24 +690,24 @@ const MoneyBlockQuiz = () => {
                 key={index}
                 onClick={() => handleAnswer(index)}
                 style={styles.optionButton}
-                onMouseEnter={(e) => {
-                  Object.assign(e.target.style, styles.optionButtonHover);
-                  const icon = e.target.querySelector("svg");
-                  if (icon) {
-                    icon.style.opacity = "1";
-                    icon.style.transform = "translateX(4px)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = "rgba(255, 255, 255, 0.05)";
-                  e.target.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                  e.target.style.boxShadow = "none";
-                  const icon = e.target.querySelector("svg");
-                  if (icon) {
-                    icon.style.opacity = "0";
-                    icon.style.transform = "translateX(0)";
-                  }
-                }}
+                // onMouseEnter={(e) => {
+                //   Object.assign(e.target.style, styles.optionButtonHover);
+                //   const icon = e.target.querySelector("svg");
+                //   if (icon) {
+                //     icon.style.opacity = "1";
+                //     icon.style.transform = "translateX(4px)";
+                //   }
+                // }}
+                // onMouseLeave={(e) => {
+                //   e.target.style.background = "rgba(255, 255, 255, 0.05)";
+                //   e.target.style.borderColor = "rgba(255, 255, 255, 0.1)";
+                //   e.target.style.boxShadow = "none";
+                //   const icon = e.target.querySelector("svg");
+                //   if (icon) {
+                //     icon.style.opacity = "0";
+                //     icon.style.transform = "translateX(0)";
+                //   }
+                // }}
               >
                 <span>{option.text}</span>
                 <ChevronRight
