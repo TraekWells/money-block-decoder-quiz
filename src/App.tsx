@@ -396,7 +396,7 @@ const MoneyBlockQuiz = () => {
     container: {
       minHeight: "100vh",
       background:
-        "linear-gradient(135deg, #2d1b69 0%, #11052c 50%, #1e1b4b 100%)",
+        "linear-gradient(135deg, #045C46 0%, #023125 50%, #045C46 100%)",
       padding: "20px",
       fontFamily:
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -422,7 +422,7 @@ const MoneyBlockQuiz = () => {
       marginBottom: "10px",
     },
     subtitle: {
-      color: "#c4b5fd",
+      color: "#ffffff",
       fontSize: "16px",
     },
     progressContainer: {
@@ -432,7 +432,7 @@ const MoneyBlockQuiz = () => {
       display: "flex",
       justifyContent: "space-between",
       fontSize: "14px",
-      color: "#c4b5fd",
+      color: "#ffffff",
       marginBottom: "10px",
     },
     progressBarTrack: {
@@ -485,7 +485,7 @@ const MoneyBlockQuiz = () => {
     },
     navigationHint: {
       textAlign: "center",
-      color: "#c4b5fd",
+      color: "#ffffff",
       fontSize: "14px",
     },
     resultContainer: {
@@ -504,7 +504,7 @@ const MoneyBlockQuiz = () => {
     resultArchetype: {
       fontSize: "22px",
       fontWeight: "600",
-      color: "#c4b5fd",
+      color: "#ffffff",
       marginBottom: "30px",
     },
     resultSections: {
@@ -524,7 +524,7 @@ const MoneyBlockQuiz = () => {
       fontSize: "18px",
       fontWeight: "600",
       marginBottom: "12px",
-      color: "#c4b5fd",
+      color: "#ffffff",
     },
     beliefText: {
       fontStyle: "italic",
