@@ -1,0 +1,31 @@
+.progressContainer {
+  margin-bottom: 40px;
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.progressBarTrack {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  // background-color: var(--secondary-color);
+  background: linear-gradient(
+    90deg,
+    var(--secondary-color-dark),
+    var(--secondary-color)
+  );
+  border-radius: 6px;
+  transition: width 0.5s ease-out;
+}

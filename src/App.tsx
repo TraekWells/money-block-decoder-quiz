@@ -2,6 +2,7 @@ import React from "react";
 import { ChevronRight, RefreshCw } from "lucide-react";
 import styles from "./App.module.scss";
 import { ARCHETYPES, QUESTIONS } from "./global/constants";
+import ProgressBar from "./components/ProgressBar";
 
 type ResultTypes = {
   archetype: string;
@@ -112,8 +113,6 @@ const MoneyBlockQuiz = () => {
     setEmailError("");
     setShowEmailForm(false);
   };
-
-  const progressPercentage = ((currentQuestion + 1) / QUESTIONS.length) * 100;
 
   if (showEmailForm) {
     return (
@@ -257,22 +256,10 @@ const MoneyBlockQuiz = () => {
         </div>
 
         {/* Progress Bar */}
-        <div className={styles.progressContainer}>
-          <div className={styles.progressInfo}>
-            <span>
-              Question {currentQuestion + 1} of {QUESTIONS.length}
-            </span>
-            <span>{Math.round(progressPercentage)}% Complete</span>
-          </div>
-          <div className={styles.progressBarTrack}>
-            <div
-              className={styles.progressBarFill}
-              style={{
-                width: `${progressPercentage}%`,
-              }}
-            />
-          </div>
-        </div>
+        <ProgressBar
+          currentQuestion={currentQuestion}
+          questionLength={QUESTIONS.length}
+        />
 
         {/* Question */}
         <div className={styles.questionContainer}>
