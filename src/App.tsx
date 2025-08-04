@@ -3,6 +3,7 @@ import { ChevronRight, RefreshCw } from "lucide-react";
 import styles from "./App.module.scss";
 import { ARCHETYPES, QUESTIONS } from "./global/constants";
 import ProgressBar from "./components/ProgressBar";
+import { addSubmission } from "./helpers/AddSubmission";
 
 type ResultTypes = {
   archetype: string;
@@ -113,6 +114,12 @@ const MoneyBlockQuiz = () => {
     setEmailError("");
     setShowEmailForm(false);
   };
+
+  React.useEffect(() => {
+    if (!showResult) return;
+
+    addSubmission(email, result?.archetype);
+  }, [showResult, email, result?.archetype]);
 
   if (showEmailForm) {
     return (
