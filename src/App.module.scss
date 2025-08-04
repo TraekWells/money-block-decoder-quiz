@@ -259,11 +259,6 @@
 
 .startButton {
   background: var(--secondary-color);
-  // background: linear-gradient(
-  //   135deg,
-  //   var(--primary-color),
-  //   var(--secondary-color)
-  // );
   color: var(--text-color);
   padding: 16px 24px;
   border-radius: 12px;
@@ -276,7 +271,7 @@
 }
 
 .privacyNote {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-color);
   font-style: italic;
   margin-top: 20px;

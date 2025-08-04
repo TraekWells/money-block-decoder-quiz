@@ -119,7 +119,7 @@ const MoneyBlockQuiz = () => {
       <div className={styles.container}>
         <div className={styles.quizCard}>
           <div className={styles.emailContainer}>
-            <h1 className={styles.emailTitle}>Money Block Archetypes Quiz</h1>
+            <h1 className={styles.emailTitle}>Money Block Decoder Quiz</h1>
             <h2 className={styles.emailSubtitle}>
               Discover what's blocking your financial flow.
               <br />
@@ -168,7 +168,7 @@ const MoneyBlockQuiz = () => {
 
             <p className={styles.privacyNote}>
               We respect your privacy. Your email will only be used to send you
-              your quiz results.
+              your quiz results and communications from The Wealth Shift.
             </p>
           </div>
         </div>
