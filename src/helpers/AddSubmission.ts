@@ -12,6 +12,7 @@ export const addSubmission = async (
       email,
       archetype,
     });
+
     console.log("Submission saved successfully");
   } catch (error) {
     console.error("Error saving submission:", error);
