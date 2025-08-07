@@ -1,7 +1,7 @@
 import Quiz from "../components/Quiz";
 
-const Home = () => {
+const HomePage = () => {
   return <Quiz />;
 };
 
-export default Home;
+export default HomePage;

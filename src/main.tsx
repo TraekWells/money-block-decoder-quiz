@@ -2,15 +2,15 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./index.css";
-import Home from "./pages/Home.tsx";
-import Dashboard from "./components/Dashboard/Dashboard.tsx";
+import HomePage from "./pages/Home";
+import DashboardPage from "./pages/Dashboard";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route index element={<HomePage />}></Route>
+        <Route path="/dashboard" element={<DashboardPage />}></Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>

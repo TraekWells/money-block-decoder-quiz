@@ -13,6 +13,7 @@ import {
 import { Users, Mail, Download, Search } from "lucide-react";
 import { collection, getDocs } from "firebase/firestore";
 import { db, DB_COLLECTIONS } from "../../firebase/config";
+import Container from "../../layout/Container";
 
 type QuizData = {
   email: string;
@@ -132,18 +133,6 @@ const Dashboard = () => {
   const topArchetype = pieData.sort((a, b) => b.value - a.value)[0];
 
   const styles = {
-    container: {
-      minHeight: "100vh",
-      background:
-        "linear-gradient(135deg, #2d1b69 0%, #11052c 50%, #1e1b4b 100%)",
-      padding: "20px",
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    },
-    dashboardContainer: {
-      maxWidth: "1400px",
-      margin: "0 auto",
-    },
     header: {
       textAlign: "center",
       marginBottom: "40px",
@@ -384,7 +373,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div style={styles.container}>
+    <Container>
       <div style={styles.dashboardContainer}>
         {/* Header */}
         <div style={styles.header}>
@@ -571,14 +560,19 @@ const Dashboard = () => {
 
           {filteredData.length === 0 && (
             <div
-              style={{ textAlign: "center", padding: "40px", color: "#c4b5fd" }}
+              style={{
+                textAlign: "center",
+                padding: "40px",
+                color: "#c4b5fd",
+              }}
             >
               No results found matching your search criteria.
             </div>
           )}
         </div>
       </div>
-    </div>
+      =
+    </Container>
   );
 };
 
