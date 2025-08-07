@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRight, RefreshCw } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import styles from "./App.module.scss";
 import { ARCHETYPES, QUESTIONS } from "./global/constants";
 import ProgressBar from "./components/ProgressBar";
@@ -84,16 +84,6 @@ const MoneyBlockQuiz = () => {
     }
 
     setShowResult(true);
-  };
-
-  const resetQuiz = () => {
-    setCurrentQuestion(0);
-    setAnswers({});
-    setShowResult(false);
-    setResult(null);
-    setEmail("");
-    setShowEmailForm(true);
-    setEmailError("");
   };
 
   const validateEmail = (email: string) => {
@@ -230,22 +220,17 @@ const MoneyBlockQuiz = () => {
                 "{archetypeData.affirmation}"
               </p>
             </div>
+            <div
+              className={`${styles.resultSection} ${styles.affirmationSection}`}
+            >
+              <h3 className={styles.sectionTitleLg}>⏭️ Next Steps</h3>
+              <p className={styles.affirmationText}>
+                Your Mini Toolkit, crafted for your unique Money Block is
+                landing in your inbox. Let’s start shifting your relationship
+                with money now!
+              </p>
+            </div>
           </div>
-
-          <button
-            onClick={resetQuiz}
-            className={styles.resetButton}
-            onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.transform =
-                "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLButtonElement).style.transform = "translateY(0)";
-            }}
-          >
-            <RefreshCw size={20} />
-            Take Quiz Again
-          </button>
         </div>
       </div>
     );
