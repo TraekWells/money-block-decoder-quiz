@@ -19,4 +19,4 @@ jobs:
           target-server: quiz.thewealthshift.me
           remote-user: u829604987
           private-ssh-key: ${{ secrets.SSH_KEY }}
-          destination-path: /home/u829604987/domains/thewealthshift.me/quiz.thewealthshift.me
+          destination-path: /home/u829604987/domains/thewealthshift.me/public_html/quiz
