@@ -1,28 +1,3 @@
-:root {
-  --primary-color-light: hsl(165, 40%, 75%);
-  --primary-color: #045c46;
-  --primary-color-dark: #023125;
-  --secondary-color: #cda42a;
-  --secondary-color-dark: #a98723;
-  --background-gradient: linear-gradient(
-    135deg,
-    var(--primary-color-dark),
-    var(--primary-color-dark),
-    var(--primary-color-dark)
-  );
-  --text-color: #ffffff;
-  --accent-color: #cda42a;
-  --error-color: #ef4444;
-}
-
-.container {
-  min-height: 100vh;
-  background: var(--background-gradient);
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-}
-
 .quizCard {
   max-width: 700px;
   margin: 0 auto;

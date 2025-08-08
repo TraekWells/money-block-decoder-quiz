@@ -1,9 +1,9 @@
 import React from "react";
 import { ChevronRight } from "lucide-react";
-import styles from "./App.module.scss";
-import { ARCHETYPES, QUESTIONS } from "./global/constants";
-import ProgressBar from "./components/ProgressBar";
-import { addSubmission } from "./helpers/AddSubmission";
+import styles from "./Quiz.module.scss";
+import { ARCHETYPES, QUESTIONS } from "../../global/constants";
+import { addSubmission } from "../../helpers/AddSubmission";
+import ProgressBar from "../ProgressBar";
 
 type ResultTypes = {
   archetype: string;
@@ -11,7 +11,7 @@ type ResultTypes = {
   scores: Record<string, number>;
 };
 
-const MoneyBlockQuiz = () => {
+const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const [answers, setAnswers] = React.useState({});
   const [showResult, setShowResult] = React.useState(false);
@@ -315,4 +315,4 @@ const MoneyBlockQuiz = () => {
   );
 };
 
-export default MoneyBlockQuiz;
+export default Quiz;
