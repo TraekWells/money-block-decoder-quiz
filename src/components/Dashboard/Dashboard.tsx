@@ -14,86 +14,35 @@ import { Users, Mail, Download, Search } from "lucide-react";
 import { collection, getDocs } from "firebase/firestore";
 import { db, DB_COLLECTIONS } from "../../firebase/config";
 import Container from "../../layout/Container";
+import { useAuth } from "../../hooks/useAuth";
+import styles from "./Dashboard.module.scss";
 
 type QuizData = {
   email: string;
   archetype: string;
-}[];
+};
+
+type TooltipProps = {
+  active?: boolean;
+  payload?: Array<{
+    payload: {
+      name: string;
+      value: number;
+      percentage: string;
+      emoji: string;
+      color: string;
+    };
+  }>;
+};
 
 const Dashboard = () => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [filterArchetype, setFilterArchetype] = React.useState("All");
   const [quizData, setQuizData] = React.useState<QuizData[]>([]);
 
-  // Mock data - in a real app, this would come from your backend/database
-  const mockData = [
-    {
-      email: "dwayne.johnson@email.com",
-      archetype: "Invisible Earner",
-    },
-    {
-      email: "sarah.johnson@email.com",
-      archetype: "Invisible Earner",
-    },
-    {
-      email: "mike.chen@company.com",
-      archetype: "Prover",
-    },
-    {
-      email: "emma.wilson@startup.co",
-      archetype: "Worthiness Wobbler",
-    },
-    {
-      email: "david.brown@freelance.net",
-      archetype: "Ancestral Loyalist",
-    },
-    {
-      email: "lisa.martinez@agency.com",
-      archetype: "Scarcity Keeper",
-    },
-    {
-      email: "james.taylor@consulting.biz",
-      archetype: "Martyr Manifestor",
-    },
-    {
-      email: "amy.davis@creative.studio",
-      archetype: "Avoidant Dreamer",
-    },
-    {
-      email: "robert.garcia@tech.io",
-      archetype: "Control Keeper",
-    },
-    {
-      email: "jessica.moore@design.co",
-      archetype: "Invisible Earner",
-    },
-    {
-      email: "kevin.lee@marketing.pro",
-      archetype: "Prover",
-    },
-    {
-      email: "melissa.clark@wellness.com",
-      archetype: "Worthiness Wobbler",
-    },
-    {
-      email: "daniel.white@finance.corp",
-      archetype: "Scarcity Keeper",
-    },
-    {
-      email: "rachel.adams@coach.life",
-      archetype: "Martyr Manifestor",
-    },
-    {
-      email: "chris.thompson@business.net",
-      archetype: "Control Keeper",
-    },
-    {
-      email: "natalie.jones@spiritual.guru",
-      archetype: "Avoidant Dreamer",
-    },
-  ];
+  const { signOut } = useAuth();
 
-  const archetypeInfo = {
+  const archetypeInfo: Record<string, { emoji: string; color: string }> = {
     "Invisible Earner": { emoji: "🕵️‍♀️", color: "#8b5cf6" },
     Prover: { emoji: "💪", color: "#ec4899" },
     "Worthiness Wobbler": { emoji: "😬", color: "#06b6d4" },
@@ -105,21 +54,26 @@ const Dashboard = () => {
   };
 
   // Calculate pie chart data
-  const archetypeCounts = mockData.reduce((acc, item) => {
-    acc[item.archetype] = (acc[item.archetype] || 0) + 1;
-    return acc;
-  }, {});
+  const archetypeCounts = quizData.reduce<Record<string, number>>(
+    (acc, item) => {
+      acc[item.archetype] = (acc[item.archetype] || 0) + 1;
+      return acc;
+    },
+    {}
+  );
 
-  const pieData = Object.entries(archetypeCounts).map(([archetype, count]) => ({
-    name: archetype,
-    value: count,
-    percentage: ((count / mockData.length) * 100).toFixed(1),
-    color: archetypeInfo[archetype].color,
-    emoji: archetypeInfo[archetype].emoji,
-  }));
+  const archetypeData = Object.entries(archetypeCounts).map(
+    ([archetype, count]) => ({
+      name: archetype,
+      value: count,
+      percentage: ((count / quizData.length) * 100).toFixed(1),
+      color: archetypeInfo[archetype].color,
+      emoji: archetypeInfo[archetype].emoji,
+    })
+  );
 
   // Filter data based on search and archetype filter
-  const filteredData = mockData.filter((item) => {
+  const filteredData = quizData.filter((item) => {
     const matchesSearch = item.email
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -128,193 +82,11 @@ const Dashboard = () => {
     return matchesSearch && matchesFilter;
   });
 
-  const totalUsers = mockData.length;
+  const totalUsers = quizData.length;
 
-  const topArchetype = pieData.sort((a, b) => b.value - a.value)[0];
+  const topArchetype = archetypeData.sort((a, b) => b.value - a.value)[0];
 
-  const styles = {
-    header: {
-      textAlign: "center",
-      marginBottom: "40px",
-      color: "white",
-    },
-    title: {
-      fontSize: "36px",
-      fontWeight: "bold",
-      marginBottom: "10px",
-    },
-    subtitle: {
-      fontSize: "18px",
-      color: "#c4b5fd",
-    },
-    statsGrid: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-      gap: "20px",
-      marginBottom: "40px",
-    },
-    statCard: {
-      background: "rgba(255, 255, 255, 0.1)",
-      backdropFilter: "blur(20px)",
-      borderRadius: "16px",
-      padding: "24px",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      textAlign: "center",
-      color: "white",
-    },
-    statIcon: {
-      marginBottom: "12px",
-      color: "#8b5cf6",
-    },
-    statValue: {
-      fontSize: "32px",
-      fontWeight: "bold",
-      marginBottom: "8px",
-    },
-    statLabel: {
-      fontSize: "14px",
-      color: "#c4b5fd",
-    },
-    chartsGrid: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))",
-      gap: "30px",
-      marginBottom: "40px",
-    },
-    chartCard: {
-      background: "rgba(255, 255, 255, 0.1)",
-      backdropFilter: "blur(20px)",
-      borderRadius: "20px",
-      padding: "30px",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      color: "white",
-    },
-    chartTitle: {
-      fontSize: "20px",
-      fontWeight: "600",
-      marginBottom: "20px",
-      textAlign: "center",
-    },
-    tableCard: {
-      background: "rgba(255, 255, 255, 0.1)",
-      backdropFilter: "blur(20px)",
-      borderRadius: "20px",
-      padding: "30px",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      color: "white",
-    },
-    tableHeader: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: "20px",
-      flexWrap: "wrap",
-      gap: "15px",
-    },
-    tableTitle: {
-      fontSize: "24px",
-      fontWeight: "600",
-    },
-    filtersContainer: {
-      display: "flex",
-      gap: "15px",
-      alignItems: "center",
-      flexWrap: "wrap",
-    },
-    searchInput: {
-      padding: "10px 15px",
-      borderRadius: "8px",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      background: "rgba(255, 255, 255, 0.1)",
-      color: "white",
-      outline: "none",
-      minWidth: "200px",
-    },
-    filterSelect: {
-      padding: "10px 15px",
-      borderRadius: "8px",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      background: "rgba(255, 255, 255, 0.1)",
-      color: "white",
-      outline: "none",
-    },
-    exportButton: {
-      padding: "10px 20px",
-      background: "linear-gradient(135deg, #8b5cf6, #ec4899)",
-      color: "white",
-      border: "none",
-      borderRadius: "8px",
-      cursor: "pointer",
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-      fontSize: "14px",
-      fontWeight: "500",
-    },
-    table: {
-      width: "100%",
-      borderCollapse: "collapse",
-    },
-    tableHeaderRow: {
-      borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-    },
-    tableHeaderCell: {
-      padding: "15px 10px",
-      textAlign: "left",
-      fontWeight: "600",
-      color: "#c4b5fd",
-      fontSize: "14px",
-    },
-    tableRow: {
-      borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-      transition: "background-color 0.2s ease",
-    },
-    tableCell: {
-      padding: "15px 10px",
-      fontSize: "14px",
-    },
-    archetypeCell: {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-    },
-    archetypeEmoji: {
-      fontSize: "16px",
-    },
-    archetypeBadge: {
-      padding: "4px 8px",
-      borderRadius: "12px",
-      fontSize: "12px",
-      fontWeight: "500",
-    },
-    scoreCell: {
-      fontWeight: "600",
-    },
-    legendContainer: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-      gap: "10px",
-      marginTop: "20px",
-    },
-    legendItem: {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-      padding: "8px",
-      borderRadius: "8px",
-      background: "rgba(255, 255, 255, 0.05)",
-    },
-    legendColor: {
-      width: "12px",
-      height: "12px",
-      borderRadius: "50%",
-    },
-    legendText: {
-      fontSize: "12px",
-    },
-  };
-
-  const CustomTooltip = ({ active, payload }) => {
+  const CustomTooltip = ({ active, payload }: TooltipProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -374,64 +146,64 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <div style={styles.dashboardContainer}>
-        {/* Header */}
-        <div style={styles.header}>
-          <h1 style={styles.title}>Money Block Archetypes Dashboard</h1>
-          <p style={styles.subtitle}>
+      <div>
+        <div className={styles.header}>
+          <button onClick={signOut}>Sign Out</button>
+          <h1 className={styles.title}>Money Block Archetypes Dashboard</h1>
+          <p className={styles.subtitle}>
             Analytics and insights from quiz participants
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div style={styles.statsGrid}>
-          <div style={styles.statCard}>
-            <div style={{ fontSize: "32px", marginBottom: "12px" }}>
+        <div className={styles.statsGrid}>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon} style={{ fontSize: "32px" }}>
               {topArchetype.emoji}
             </div>
-            <div style={styles.statValue}>{topArchetype.value}</div>
-            <div style={styles.statLabel}>Most Common: {topArchetype.name}</div>
+            <div className={styles.statValue}>{topArchetype.value}</div>
+            <div className={styles.statLabel}>
+              Most Common: {topArchetype.name}
+            </div>
           </div>
-          <div style={styles.statCard}>
-            <Users size={32} style={styles.statIcon} />
-            <div style={styles.statValue}>{totalUsers}</div>
-            <div style={styles.statLabel}>Total Participants</div>
+          <div className={styles.statCard}>
+            <Users size={32} className={styles.statIcon} />
+            <div className={styles.statValue}>{totalUsers}</div>
+            <div className={styles.statLabel}>Total Participants</div>
           </div>
         </div>
 
         {/* Charts Grid */}
-        <div style={styles.chartsGrid}>
+        <div className={styles.chartsGrid}>
           {/* Pie Chart */}
-          <div style={styles.chartCard}>
-            <h3 style={styles.chartTitle}>Archetype Distribution</h3>
+          <div className={styles.chartCard}>
+            <h3 className={styles.chartTitle}>Archetype Distribution</h3>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={pieData}
+                  data={archetypeData}
                   cx="50%"
                   cy="50%"
                   outerRadius={100}
                   dataKey="value"
-                  label={({ name, percentage }) => `${percentage}%`}
+                  label={({ percentage }) => `${percentage}%`}
                   labelLine={false}
                 >
-                  {pieData.map((entry, index) => (
+                  {archetypeData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
                 <Tooltip content={<CustomTooltip />} />
               </PieChart>
             </ResponsiveContainer>
-            <div style={styles.legendContainer}>
-              {pieData.map((item, index) => (
-                <div key={index} style={styles.legendItem}>
+            <div className={styles.legendContainer}>
+              {archetypeData.map((item, index) => (
+                <div key={index} className={styles.legendItem}>
                   <div
-                    style={{
-                      ...styles.legendColor,
-                      backgroundColor: item.color,
-                    }}
+                    className={styles.legendColor}
+                    style={{ backgroundColor: item.color }}
                   />
-                  <span style={styles.legendText}>
+                  <span className={styles.legendText}>
                     {item.emoji} {item.name} ({item.value})
                   </span>
                 </div>
@@ -440,11 +212,11 @@ const Dashboard = () => {
           </div>
 
           {/* Bar Chart */}
-          <div style={styles.chartCard}>
-            <h3 style={styles.chartTitle}>Archetype Counts</h3>
+          <div className={styles.chartCard}>
+            <h3 className={styles.chartTitle}>Archetype Counts</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart
-                data={pieData}
+                data={archetypeData}
                 margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
               >
                 <XAxis
@@ -463,10 +235,10 @@ const Dashboard = () => {
         </div>
 
         {/* Data Table */}
-        <div style={styles.tableCard}>
-          <div style={styles.tableHeader}>
-            <h3 style={styles.tableTitle}>Participant Results</h3>
-            <div style={styles.filtersContainer}>
+        <div className={styles.tableCard}>
+          <div className={styles.tableHeader}>
+            <h3 className={styles.tableTitle}>Participant Results</h3>
+            <div className={styles.filtersContainer}>
               <div style={{ position: "relative" }}>
                 <Search
                   size={16}
@@ -483,13 +255,14 @@ const Dashboard = () => {
                   placeholder="Search emails..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{ ...styles.searchInput, paddingLeft: "40px" }}
+                  className={styles.searchInput}
+                  style={{ paddingLeft: "40px" }}
                 />
               </div>
               <select
                 value={filterArchetype}
                 onChange={(e) => setFilterArchetype(e.target.value)}
-                style={styles.filterSelect}
+                className={styles.filterSelect}
               >
                 <option value="All">All Archetypes</option>
                 {Object.keys(archetypeInfo).map((archetype) => (
@@ -498,34 +271,24 @@ const Dashboard = () => {
                   </option>
                 ))}
               </select>
-              <button onClick={exportData} style={styles.exportButton}>
+              <button onClick={exportData} className={styles.exportButton}>
                 <Download size={16} />
                 Export CSV
               </button>
             </div>
           </div>
 
-          <table style={styles.table}>
+          <table className={styles.table}>
             <thead>
-              <tr style={styles.tableHeaderRow}>
-                <th style={styles.tableHeaderCell}>Email</th>
-                <th style={styles.tableHeaderCell}>Archetype</th>
+              <tr className={styles.tableHeaderRow}>
+                <th className={styles.tableHeaderCell}>Email</th>
+                <th className={styles.tableHeaderCell}>Archetype</th>
               </tr>
             </thead>
             <tbody>
               {filteredData.map((item, index) => (
-                <tr
-                  key={index}
-                  style={styles.tableRow}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "rgba(255, 255, 255, 0.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                  }}
-                >
-                  <td style={styles.tableCell}>
+                <tr key={index} className={styles.tableRow}>
+                  <td className={styles.tableCell}>
                     <div
                       style={{
                         display: "flex",
@@ -537,14 +300,14 @@ const Dashboard = () => {
                       {item.email}
                     </div>
                   </td>
-                  <td style={styles.tableCell}>
-                    <div style={styles.archetypeCell}>
-                      <span style={styles.archetypeEmoji}>
+                  <td className={styles.tableCell}>
+                    <div className={styles.archetypeCell}>
+                      <span className={styles.archetypeEmoji}>
                         {archetypeInfo[item.archetype].emoji}
                       </span>
                       <span
+                        className={styles.archetypeBadge}
                         style={{
-                          ...styles.archetypeBadge,
                           backgroundColor: archetypeInfo[item.archetype].color,
                           color: "white",
                         }}
@@ -571,7 +334,6 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      =
     </Container>
   );
 };

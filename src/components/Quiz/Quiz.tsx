@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import styles from "./Quiz.module.scss";
 import { ARCHETYPES, QUESTIONS } from "../../global/constants";
 import { addSubmission } from "../../helpers/AddSubmission";
+import ProgressBar from "../ProgressBar";
 
 type ResultTypes = {
   archetype: string;
