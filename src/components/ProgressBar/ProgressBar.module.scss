@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: var(--text-color);
+  color: var(--color-text);
   margin-bottom: 10px;
 }
 
@@ -20,11 +20,11 @@
 
 .progressBarFill {
   height: 100%;
-  // background-color: var(--secondary-color);
+  // background-color: var(--color-secondary);
   background: linear-gradient(
     90deg,
-    var(--secondary-color-dark),
-    var(--secondary-color)
+    var(--color-secondary-dark),
+    var(--color-secondary)
   );
   border-radius: 6px;
   transition: width 0.5s ease-out;

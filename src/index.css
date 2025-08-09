@@ -1,22 +1,33 @@
 :root {
-  --primary-color-light: hsl(165, 40%, 75%);
-  --primary-color: #045c46;
-  --primary-color-dark: #023125;
-  --secondary-color: #cda42a;
-  --secondary-color-dark: #a98723;
-  --background-gradient: linear-gradient(
-    135deg,
-    var(--primary-color-dark),
-    var(--primary-color-dark),
-    var(--primary-color-dark)
-  );
-  --text-color: #ffffff;
-  --accent-color: #cda42a;
-  --error-color: #ef4444;
+  --color-primary-light: hsl(165, 40%, 75%);
+  --color-primary: #045c46;
+  --color-primary-dark: #023125;
+  --color-secondary: #cda42a;
+  --color-secondary-dark: #a98723;
+  --color-white: #fff;
+  --color-text: #ffffff;
+  --color-accent: #cda42a;
+  --color-error: #ef4444;
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --space-2xs: clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem);
+  --space-xs: clamp(0.875rem, 0.8494rem + 0.1136vw, 0.9375rem);
+  --space-s: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+  --space-m: clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem);
+  --space-l: clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem);
+  --space-xl: clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem);
+  --space-2xl: clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem);
+
+  --font-size-xs: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
+  --font-size-sm: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1rem);
+  --font-size-base: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+  --font-size-md: clamp(1.35rem, 1.2631rem + 0.3864vw, 1.5625rem);
+  --font-size-lg: clamp(1.62rem, 1.4837rem + 0.6057vw, 1.9531rem);
+  --font-size-xl: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
+
+  font-family: var(--font-family);
   line-height: 1.5;
-  font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -30,8 +41,9 @@
 
 body {
   min-height: 100vh;
-  background: var(--background-gradient);
-  padding: 20px;
+  background: var(--color-primary-dark);
+  margin: 0;
+  padding-block-start: var(--space-xl);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 }
@@ -45,14 +57,10 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
 h1 {
-  font-size: 3.2em;
+  font-size: var(--font-size-xl);
   line-height: 1.1;
+  color: var(--color-white);
 }
 
 button {

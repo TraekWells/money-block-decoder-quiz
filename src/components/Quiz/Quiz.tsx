@@ -4,6 +4,7 @@ import styles from "./Quiz.module.scss";
 import { ARCHETYPES, QUESTIONS } from "../../global/constants";
 import { addSubmission } from "../../helpers/AddSubmission";
 import ProgressBar from "../ProgressBar";
+import Container from "@/layout/Container";
 
 type ResultTypes = {
   archetype: string;
@@ -113,10 +114,10 @@ const Quiz = () => {
 
   if (showEmailForm) {
     return (
-      <div className={styles.container}>
+      <Container>
         <div className={styles.quizCard}>
           <div className={styles.emailContainer}>
-            <h1 className={styles.emailTitle}>Money Block Decoder Quiz</h1>
+            <h1>Money Block Decoder Quiz</h1>
             <h2 className={styles.emailSubtitle}>
               Discover what's blocking your financial flow.
               <br />
@@ -169,7 +170,7 @@ const Quiz = () => {
             </p>
           </div>
         </div>
-      </div>
+      </Container>
     );
   }
 
