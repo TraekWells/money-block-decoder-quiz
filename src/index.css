@@ -13,9 +13,9 @@
 
   --space-2xs: clamp(0.5625rem, 0.5369rem + 0.1136vw, 0.625rem);
   --space-xs: clamp(0.875rem, 0.8494rem + 0.1136vw, 0.9375rem);
-  --space-s: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
-  --space-m: clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem);
-  --space-l: clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem);
+  --space-sm: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+  --space-md: clamp(1.6875rem, 1.6108rem + 0.3409vw, 1.875rem);
+  --space-lg: clamp(2.25rem, 2.1477rem + 0.4545vw, 2.5rem);
   --space-xl: clamp(3.375rem, 3.2216rem + 0.6818vw, 3.75rem);
   --space-2xl: clamp(4.5rem, 4.2955rem + 0.9091vw, 5rem);
 
@@ -39,6 +39,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* BASE STYLES */
+
 body {
   min-height: 100vh;
   background: var(--color-primary-dark);
@@ -47,6 +49,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 }
+
+/* TYPOGRAPHY STYLES */
 
 a {
   font-weight: 500;
@@ -63,23 +67,22 @@ h1 {
   color: var(--color-white);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+/* UTILITY STYLES */
+.text-hint {
+  text-align: center;
+  color: var(--color-text);
+  font-size: var(--font-size-xs);
 }
-button:hover {
-  border-color: #646cff;
+
+.lead {
+  color: var(--color-primary-light);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.margin-top-lg {
+  margin-block-start: var(--space-lg);
 }
 
 @media (prefers-color-scheme: light) {

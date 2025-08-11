@@ -6,6 +6,7 @@ import { addSubmission } from "../../helpers/AddSubmission";
 import ProgressBar from "../ProgressBar";
 import Container from "@/layout/Container";
 import Card from "../Card";
+import Button from "../Button";
 
 type ResultTypes = {
   archetype: string;
@@ -119,12 +120,12 @@ const Quiz = () => {
         <Card>
           <div className={styles.emailContainer}>
             <h1>Money Block Decoder Quiz</h1>
-            <h2 className={styles.emailSubtitle}>
+            <p className="lead">
               Discover what's blocking your financial flow.
               <br />
               Enter your email to get started and receive your personalized
               results.
-            </h2>
+            </p>
 
             <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
               <input
@@ -149,23 +150,10 @@ const Quiz = () => {
                 <div className={styles.emailError}>{emailError}</div>
               )}
 
-              <button
-                type="submit"
-                className={styles.startButton}
-                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  (e.target as HTMLButtonElement).style.transform =
-                    "translateY(-2px)";
-                }}
-                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  (e.target as HTMLButtonElement).style.transform =
-                    "translateY(0)";
-                }}
-              >
-                Start Quiz
-              </button>
+              <Button>Start Quiz</Button>
             </form>
 
-            <p className={styles.privacyNote}>
+            <p className="text-hint margin-top-lg">
               We respect your privacy. Your email will only be used to send you
               your quiz results and communications from The Wealth Shift.
             </p>
@@ -182,10 +170,8 @@ const Quiz = () => {
       <Container>
         <Card>
           <div className={styles.resultContainer}>
-            <h1 className={styles.resultArchetype}>
-              Your Money Block Archetype
-            </h1>
-            <h2 className={styles.resultTitle}>{archetypeData.title}</h2>
+            <h1>Your Money Block Archetype</h1>
+            <p className="lead">{archetypeData.title}</p>
             <div className={styles.resultEmoji}>{archetypeData.emoji}</div>
           </div>
 
@@ -245,9 +231,7 @@ const Quiz = () => {
           {/* Header */}
           <div className={styles.header}>
             <h1>Money Block Archetypes Quiz</h1>
-            <p className={styles.subtitle}>
-              Discover what's blocking your financial flow
-            </p>
+            <p className="lead">Discover what's blocking your financial flow</p>
           </div>
 
           {/* Progress Bar */}
@@ -309,10 +293,9 @@ const Quiz = () => {
             </div>
           </div>
 
-          {/* Navigation hint */}
-          <div className={styles.navigationHint}>
-            <p>Choose the answer that resonates most with you</p>
-          </div>
+          <p className="text-hint">
+            Choose the answer that resonates most with you
+          </p>
         </div>
       </Card>
     </Container>
