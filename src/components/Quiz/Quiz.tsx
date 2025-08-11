@@ -179,8 +179,8 @@ const Quiz = () => {
     const archetypeData = ARCHETYPES[result.archetype];
 
     return (
-      <div className={styles.container}>
-        <div className={styles.quizCard}>
+      <Container>
+        <Card>
           <div className={styles.resultContainer}>
             <h1 className={styles.resultArchetype}>
               Your Money Block Archetype
@@ -233,87 +233,89 @@ const Quiz = () => {
               </p>
             </div>
           </div>
-        </div>
-      </div>
+        </Card>
+      </Container>
     );
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.quizCard}>
-        {/* Header */}
-        <div className={styles.header}>
-          <h1>Money Block Archetypes Quiz</h1>
-          <p className={styles.subtitle}>
-            Discover what's blocking your financial flow
-          </p>
-        </div>
+    <Container>
+      <Card>
+        <div className={styles.quizCard}>
+          {/* Header */}
+          <div className={styles.header}>
+            <h1>Money Block Archetypes Quiz</h1>
+            <p className={styles.subtitle}>
+              Discover what's blocking your financial flow
+            </p>
+          </div>
 
-        {/* Progress Bar */}
-        <ProgressBar
-          currentQuestion={currentQuestion}
-          questionLength={QUESTIONS.length}
-        />
+          {/* Progress Bar */}
+          <ProgressBar
+            currentQuestion={currentQuestion}
+            questionLength={QUESTIONS.length}
+          />
 
-        {/* Question */}
-        <div className={styles.questionContainer}>
-          <h2 className={styles.question}>
-            {QUESTIONS[currentQuestion].question}
-          </h2>
+          {/* Question */}
+          <div className={styles.questionContainer}>
+            <h2 className={styles.question}>
+              {QUESTIONS[currentQuestion].question}
+            </h2>
 
-          <div className={styles.optionsContainer}>
-            {QUESTIONS[currentQuestion].options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleAnswer(index)}
-                className={styles.optionButton}
-                onMouseEnter={(e) => {
-                  Object.assign(
-                    (e.target as HTMLButtonElement).style,
-                    styles.optionButtonHover
-                  );
-                  const icon = (e.target as HTMLButtonElement).querySelector(
-                    "svg"
-                  );
-                  if (icon) {
-                    icon.style.opacity = "1";
-                    icon.style.transform = "translateX(4px)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLButtonElement).style.background =
-                    "rgba(255, 255, 255, 0.05)";
-                  (e.target as HTMLButtonElement).style.borderColor =
-                    "rgba(255, 255, 255, 0.1)";
-                  (e.target as HTMLButtonElement).style.boxShadow = "none";
-                  const icon = (e.target as HTMLButtonElement).querySelector(
-                    "svg"
-                  );
-                  if (icon) {
-                    icon.style.opacity = "0";
-                    icon.style.transform = "translateX(0)";
-                  }
-                }}
-              >
-                <span>{option.text}</span>
-                <ChevronRight
-                  size={20}
-                  style={{
-                    opacity: "0",
-                    transition: "all 0.3s ease",
+            <div className={styles.optionsContainer}>
+              {QUESTIONS[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleAnswer(index)}
+                  className={styles.optionButton}
+                  onMouseEnter={(e) => {
+                    Object.assign(
+                      (e.target as HTMLButtonElement).style,
+                      styles.optionButtonHover
+                    );
+                    const icon = (e.target as HTMLButtonElement).querySelector(
+                      "svg"
+                    );
+                    if (icon) {
+                      icon.style.opacity = "1";
+                      icon.style.transform = "translateX(4px)";
+                    }
                   }}
-                />
-              </button>
-            ))}
+                  onMouseLeave={(e) => {
+                    (e.target as HTMLButtonElement).style.background =
+                      "rgba(255, 255, 255, 0.05)";
+                    (e.target as HTMLButtonElement).style.borderColor =
+                      "rgba(255, 255, 255, 0.1)";
+                    (e.target as HTMLButtonElement).style.boxShadow = "none";
+                    const icon = (e.target as HTMLButtonElement).querySelector(
+                      "svg"
+                    );
+                    if (icon) {
+                      icon.style.opacity = "0";
+                      icon.style.transform = "translateX(0)";
+                    }
+                  }}
+                >
+                  <span>{option.text}</span>
+                  <ChevronRight
+                    size={20}
+                    style={{
+                      opacity: "0",
+                      transition: "all 0.3s ease",
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation hint */}
+          <div className={styles.navigationHint}>
+            <p>Choose the answer that resonates most with you</p>
           </div>
         </div>
-
-        {/* Navigation hint */}
-        <div className={styles.navigationHint}>
-          <p>Choose the answer that resonates most with you</p>
-        </div>
-      </div>
-    </div>
+      </Card>
+    </Container>
   );
 };
 
