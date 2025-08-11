@@ -5,6 +5,7 @@ import { ARCHETYPES, QUESTIONS } from "../../global/constants";
 import { addSubmission } from "../../helpers/AddSubmission";
 import ProgressBar from "../ProgressBar";
 import Container from "@/layout/Container";
+import Card from "../Card";
 
 type ResultTypes = {
   archetype: string;
@@ -115,7 +116,7 @@ const Quiz = () => {
   if (showEmailForm) {
     return (
       <Container>
-        <div className={styles.quizCard}>
+        <Card>
           <div className={styles.emailContainer}>
             <h1>Money Block Decoder Quiz</h1>
             <h2 className={styles.emailSubtitle}>
@@ -169,7 +170,7 @@ const Quiz = () => {
               your quiz results and communications from The Wealth Shift.
             </p>
           </div>
-        </div>
+        </Card>
       </Container>
     );
   }
@@ -242,7 +243,7 @@ const Quiz = () => {
       <div className={styles.quizCard}>
         {/* Header */}
         <div className={styles.header}>
-          <h1 className={styles.title}>Money Block Archetypes Quiz</h1>
+          <h1>Money Block Archetypes Quiz</h1>
           <p className={styles.subtitle}>
             Discover what's blocking your financial flow
           </p>
